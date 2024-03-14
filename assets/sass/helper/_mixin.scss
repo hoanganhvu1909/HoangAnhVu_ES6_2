@@ -1,0 +1,24 @@
+// mixin
+// @mixin styleText($color, $fs, $fw, $deco: none) {
+//     color: $color;
+//     font-size: $fs;
+//     font-weight: $fw;
+//     text-decoration: $deco;
+// }
+
+// @mixin styleButton($bg, $p, $color, $fs, $shadow: none) {
+//     background-color: $bg; // trắng
+//     padding: $p;
+//     border: 2px solid $color_blue_100;
+//     color: $color; // xanh
+//     font-size: $fs;
+//     box-shadow: $shadow;
+//     transition: all 0.5s;
+//     border-radius: 8px;
+//     cursor: pointer;
+
+//     &:hover {
+//         color: $bg;
+//         background-color: $color;
+//     }
+// }

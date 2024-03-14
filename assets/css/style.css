@@ -1,0 +1,60 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-image: url(./../img/star.png);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+header nav .container .navbar-brand img {
+  width: 80px;
+  border-radius: 50%;
+  filter: grayscale(30%);
+}
+header nav .nav-item a {
+  color: white;
+  font-size: 22px;
+}
+header nav .nav-item .active {
+  color: white !important;
+}
+header nav .form-control {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.info_person button {
+  font-size: 14px;
+  padding: 10px 10px;
+}
+.info_person table th {
+  background: rgba(74, 144, 226, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  color: #fff;
+}
+.info_person table th .form_select {
+  background: rgba(74, 144, 226, 0);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: none;
+  color: #fff;
+  width: 10px;
+  font-size: 16px;
+}
+.info_person table th .form_select .select-wrapper .fa-caret-down {
+  font-size: 1.5em; /* Điều chỉnh kích thước của nút icon */
+}
+.info_person table th tbody#tbodyPerson {
+  vertical-align: middle !important;
+}/*# sourceMappingURL=style.css.map */

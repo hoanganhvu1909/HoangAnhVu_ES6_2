@@ -1,0 +1,17 @@
+// Chứa những phần css giúp reset layout
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    background-image: url(./../img/star.png);
+    // width: 100vh;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    // opacity: 0.5;
+    // z-index: -100;
+}
