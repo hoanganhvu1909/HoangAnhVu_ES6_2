@@ -162,7 +162,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         Tổng lương: ${newPerson.tongLuong()} VND
         </td>;
         <td>
-        <button class="btn btn-danger" >
+        <button onClick="DelUser('${addId}')" id="btnXoa" class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
         </button>
         <button class="btn btn-info">
@@ -182,7 +182,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         Điểm trung bình: ${newPerson.tinhDiemTrungBinh()}
         </td>;
         <td>
-            <button class="btn btn-danger" >
+            <button onClick="DelUser('${addId}')" class="btn btn-danger" >
             <i class="fs-5 fa-solid fa-trash-can"></i>
             </button>
             <button class="btn btn-info">
@@ -201,7 +201,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
        Đánh giá: ${rate}
         </td>;
         <td>
-        <button class="btn btn-danger" >
+        <button onClick="DelUser('${addId}')" class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
         </button>
         <button class="btn btn-info">
@@ -230,3 +230,12 @@ function getDataLocal() {
   }
 }
 getDataLocal();
+
+// Chức năng xoá
+
+function DelUser(idPerson) {
+  listPerSon.DelUser(idPerson);
+  renderPerson();
+  saveDataLocal();
+  getDataLocal();
+}
