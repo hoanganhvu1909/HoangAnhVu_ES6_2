@@ -57,4 +57,9 @@ header nav .form-control {
 }
 .info_person table th tbody#tbodyPerson {
   vertical-align: middle !important;
+}
+.info_person table th tbody#tbodyPerson td {
+  overflow: hidden; /* Ẩn phần nội dung vượt quá giới hạn */
+  text-overflow: ellipsis; /* Hiển thị dấu chấm (...) nếu nội dung bị ẩn */
+  white-space: nowrap; /* Ngăn nội dung bị ngắt xuống hàng */
 }/*# sourceMappingURL=style.css.map */

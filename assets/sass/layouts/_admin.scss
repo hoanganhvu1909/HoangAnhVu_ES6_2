@@ -39,6 +39,7 @@ header {
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       // border: 1px solid rgba(255, 255, 255, 0.18);
       color: #fff;
+
       .form_select {
         background: rgba(74, 144, 226, 0);
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -53,6 +54,12 @@ header {
       }
       tbody#tbodyPerson {
         vertical-align: middle !important;
+        td {
+          // max-width: 200px; /* Đặt giá trị tối đa cho độ rộng của cột cuối cùng */
+          overflow: hidden; /* Ẩn phần nội dung vượt quá giới hạn */
+          text-overflow: ellipsis; /* Hiển thị dấu chấm (...) nếu nội dung bị ẩn */
+          white-space: nowrap; /* Ngăn nội dung bị ngắt xuống hàng */
+        }
       }
     }
   }

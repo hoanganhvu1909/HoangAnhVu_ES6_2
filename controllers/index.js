@@ -1,6 +1,8 @@
 import Person from '../models/Person.js';
-// import Student from '../models/Student.js';
 import ListPerson from '../models/ListPerson.js';
+import Employee from '../models/Employee.js';
+import Students from '../models/Student.js';
+import Customer from '../models/Customer.js';
 
 // Hiển thị modal theo từng đối tượng
 document.getElementById('choseType').addEventListener('change', function () {
@@ -24,17 +26,17 @@ document.getElementById('choseType').addEventListener('change', function () {
     content += `
         <div class="container-fluid py-1">
             <h5>Điểm Toán</h5>
-            <input id="addToan" type="number" class="form-control" placeholder="Nhập điểm toán">
+            <input id="addToan" type="text"  class="form-control" placeholder="Nhập điểm toán">
             <span id="spanToan" class="text-danger"></span>
         </div>
         <div class="container-fluid py-1">
             <h5>Điểm Lý</h5>
-            <input id="addLy" type="number" class="form-control" placeholder="Nhập điểm lý">
+            <input id="addLy" type="text"  class="form-control" placeholder="Nhập điểm lý">
             <span id="spanLy" class="text-danger"></span>
         </div>
         <div class="container-fluid py-1">
             <h5>Điểm Hoá</h5>
-            <input id="addHoa" type="number" class="form-control" placeholder="Nhập điểm hoá">
+            <input id="addHoa" type="text"  class="form-control" placeholder="Nhập điểm hoá">
             <span id="spanHoa" class="text-danger"></span>
         </div>
 `;
@@ -66,7 +68,18 @@ document.getElementById('btnSave').onclick = function () {
   const arrField = document.querySelectorAll('#infoForm input,#infoForm select,#infoForm select input');
   //   console.log(arrField);
   //   const monAn = new MonAn();
-  const person = new Person();
+  // const person = new Person();
+  let type = document.getElementById('choseType').value;
+  let person;
+  if (type === 'Giảng viên') {
+    person = new Employee();
+  } else if (type === 'Học viên') {
+    // Tạo đối tượng Học viên tương tự như trên
+    person = new Students();
+  } else if (type === 'Khách hàng') {
+    // Tạo đối tượng Khách hàng tương tự như trên
+    person = new Customer();
+  }
   console.log(person);
   arrField.forEach((field, index) => {
     // destructuring
@@ -80,9 +93,9 @@ document.getElementById('btnSave').onclick = function () {
   console.log(listPerSon.arr);
   renderPerson();
   // // tắt modal
-  $('#myModal').modal('hide');
+  // $('#myModal').modal('hide');
   // clear dữ liệu trên form
-  document.getElementById('infoForm').reset();
+  // document.getElementById('infoForm').reset();
   // document.getElementById('exampleModal');
 
   // // Lưu trữ dữ liệu xuống local
@@ -129,9 +142,8 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         <br>
         Lương theo ngày: ${salaryByDay}
         <br>
-        Tổng lương: ${newPerson.tongLuong}
+        Tổng lương: ${newPerson.tongLuong()} VND
         </td>;
-        </tr>
         <td>
         <button class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
@@ -140,6 +152,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         <i class="fs-5 fs-5  fa-solid fa-pen"></i>
         </button>
         </td>
+        </tr>
         `;
     } else if (choseType == 'Học viên') {
       content += `
@@ -149,7 +162,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         <br>
         Điểm hoá: ${addHoa}
         <br>
-        Điểm trung bình: ${newPerson.tinhDiemTrungBinh}
+        Điểm trung bình: ${newPerson.tinhDiemTrungBinh()}
         </td>;
         <td>
             <button class="btn btn-danger" >
