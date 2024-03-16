@@ -92,6 +92,7 @@ document.getElementById('btnSave').onclick = function () {
   listPerSon.AddUser(person);
   console.log(listPerSon.arr);
   renderPerson();
+  saveDataLocal();
   // // tắt modal
   // $('#myModal').modal('hide');
   // clear dữ liệu trên form
@@ -104,11 +105,27 @@ document.getElementById('btnSave').onclick = function () {
 
 // Render dữ liệu
 const renderPerson = (arrPerson = listPerSon.arr) => {
-  // sử dụng vòng lặp để đưa danh sách món ăn lên giao diện
+  // let type = document.getElementById('choseType').value;
+  // console.log(type);
   let content = '';
   arrPerson.forEach((user, index) => {
-    let newPerson = new Person();
-
+    // let newPerson;
+    // if (type === 'Giảng viên') {
+    //   newPerson = new Employee();
+    // } else if (type === 'Học viên') {
+    //   newPerson = new Students();
+    // } else if (type === 'Khách hàng') {
+    //   newPerson = new Customer();
+    // }
+    let newPerson;
+    if (user.choseType === 'Giảng viên') {
+      newPerson = new Employee();
+    } else if (user.choseType === 'Học viên') {
+      newPerson = new Students();
+    } else if (user.choseType === 'Khách hàng') {
+      newPerson = new Customer();
+    }
+    console.log(newPerson);
     newPerson = { ...newPerson, ...user };
     const {
       addId,
@@ -199,3 +216,17 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
 
   document.getElementById('tbodyPerson').innerHTML = content;
 };
+function saveDataLocal() {
+  let stringData = JSON.stringify(listPerSon.arr);
+  localStorage.setItem('arrPerson', stringData);
+}
+// // Hàm giúp lấy dữ liệu từ localSttorage
+function getDataLocal() {
+  let stringData = localStorage.getItem('arrPerson');
+  // Kiểm tra nếu không bị null thì thêm dữ liệu vào mảng
+  if (stringData) {
+    listPerSon.arr = JSON.parse(stringData);
+    renderPerson(); // Không truyền tham số vào đây
+  }
+}
+getDataLocal();
