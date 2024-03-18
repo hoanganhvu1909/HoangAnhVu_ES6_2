@@ -92,15 +92,12 @@ document.getElementById('btnSave').onclick = function () {
   listPerSon.AddUser(person);
   console.log(listPerSon.arr);
   renderPerson();
+  // Tắt modal
+  $('#modelId').modal('hide');
+  // Reset form
+  // console.log(document.getElementById('infoForm'));
+  document.getElementById('infoForm').reset();
   saveDataLocal();
-  // // tắt modal
-  // $('#myModal').modal('hide');
-  // clear dữ liệu trên form
-  // document.getElementById('infoForm').reset();
-  // document.getElementById('exampleModal');
-
-  // // Lưu trữ dữ liệu xuống local
-  // saveDataLocal();
 };
 
 // Render dữ liệu
@@ -109,14 +106,6 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
   // console.log(type);
   let content = '';
   arrPerson.forEach((user, index) => {
-    // let newPerson;
-    // if (type === 'Giảng viên') {
-    //   newPerson = new Employee();
-    // } else if (type === 'Học viên') {
-    //   newPerson = new Students();
-    // } else if (type === 'Khách hàng') {
-    //   newPerson = new Customer();
-    // }
     let newPerson;
     if (user.choseType === 'Giảng viên') {
       newPerson = new Employee();
@@ -165,9 +154,9 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         <button onClick="deletePerson('${addId}')" id="btnXoa" class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
         </button>
-        <button class="btn btn-info">
-        <i class="fs-5 fs-5  fa-solid fa-pen"></i>
-        </button>
+        <button onClick="getDetailPerson('${addId}')" class="btn btn-info">
+            <i class="fs-5 fa-solid fa-pen"></i>
+            </button>
         </td>
         </tr>
         `;
@@ -185,7 +174,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
             <button onClick="deletePerson('${addId}')" class="btn btn-danger" >
             <i class="fs-5 fa-solid fa-trash-can"></i>
             </button>
-            <button class="btn btn-info">
+            <button onClick="getDetailPerson('${addId}')" class="btn btn-info">
             <i class="fs-5 fa-solid fa-pen"></i>
             </button>
         </td>
@@ -203,7 +192,7 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         <button onClick="deletePerson('${addId}')" class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
         </button>
-        <button class="btn btn-info">
+        <button onClick="getDetailPerson('${addId}')" class="btn btn-info">
         <i class="fs-5  fa-solid fa-pen"></i>
         </button>
         </td>
@@ -243,6 +232,33 @@ function deletePerson(idPerson) {
   }
 }
 
+// Hàm giúp lấy thông tin
+let getDetailPerson = (idPerson) => {
+  // let person = listPerSon.arr.findIndex((user, index) => {
+  //   return user.addId == idPerson;
+  // });
+  // console.log(person);
+  let person = listPerSon.arr.find((user) => {
+    return user.addId == idPerson;
+  });
+  console.log(person);
+  if (person) {
+    // sử dụng querySelectorAll để gọi tới tất cả input, select
+    let arrInputHtml = document.querySelectorAll('form input,form select');
+    let arrInputJs = document.querySelectorAll('#userInfo input');
+    console.log(arrInputJs);
+    let arrAllInput = [...arrInputHtml, ...arrInputJs];
+    arrAllInput.forEach((item, index) => {
+      let { id } = item;
+      console.log(id);
+      item.value = person[id];
+    });
+    // mở modal để hiển thị dữ liệu
+    $('#modelId').modal('show');
+
+    // document.getElementById('foodID').readOnly = true;
+  }
+};
 window.onload = () => {
   // Khi js và css được khởi chạy xong, sẽ dom tới button và thêm sự kiện onclick
 
@@ -252,7 +268,7 @@ window.onload = () => {
     deletePerson(addId);
   };
 
-  // window.getDetailFood = (foodId) => {
-  //   getDetailFood(foodId);
-  // };
+  window.getDetailPerson = (addId) => {
+    getDetailPerson(addId);
+  };
 };
