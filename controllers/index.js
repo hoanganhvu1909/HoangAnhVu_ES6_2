@@ -160,9 +160,9 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         Lương theo ngày: ${salaryByDay}
         <br>
         Tổng lương: ${newPerson.tongLuong()} VND
-        </td>;
+        </td>
         <td>
-        <button onClick="DelUser('${addId}')" id="btnXoa" class="btn btn-danger" >
+        <button onClick="deletePerson('${addId}')" id="btnXoa" class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
         </button>
         <button class="btn btn-info">
@@ -180,9 +180,9 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         Điểm hoá: ${addHoa}
         <br>
         Điểm trung bình: ${newPerson.tinhDiemTrungBinh()}
-        </td>;
+        </td>
         <td>
-            <button onClick="DelUser('${addId}')" class="btn btn-danger" >
+            <button onClick="deletePerson('${addId}')" class="btn btn-danger" >
             <i class="fs-5 fa-solid fa-trash-can"></i>
             </button>
             <button class="btn btn-info">
@@ -190,7 +190,6 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
             </button>
         </td>
         </tr>
-
         `;
     } else if (choseType == 'Khách hàng') {
       content += `
@@ -199,9 +198,9 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
        Trị giá hoá đơn: ${billCost}
         <br>
        Đánh giá: ${rate}
-        </td>;
+        </td>
         <td>
-        <button onClick="DelUser('${addId}')" class="btn btn-danger" >
+        <button onClick="deletePerson('${addId}')" class="btn btn-danger" >
         <i class="fs-5  fa-solid fa-trash-can"></i>
         </button>
         <button class="btn btn-info">
@@ -209,7 +208,6 @@ const renderPerson = (arrPerson = listPerSon.arr) => {
         </button>
         </td>
         </tr>
-
         `;
     }
   });
@@ -233,9 +231,28 @@ getDataLocal();
 
 // Chức năng xoá
 
-function DelUser(idPerson) {
-  listPerSon.DelUser(idPerson);
-  renderPerson();
-  saveDataLocal();
-  getDataLocal();
+function deletePerson(idPerson) {
+  console.log(idPerson);
+  let index = listPerSon.arr.findIndex((person, index) => {
+    return person.addId == idPerson;
+  });
+  if (index != -1) {
+    listPerSon.DelUser(index);
+    saveDataLocal();
+    renderPerson();
+  }
 }
+
+window.onload = () => {
+  // Khi js và css được khởi chạy xong, sẽ dom tới button và thêm sự kiện onclick
+
+  // tạo ra một phương thức có tên trùng với hàm deleteFood cho window lưu trữ
+  window.deletePerson = (addId) => {
+    console.log(addId);
+    deletePerson(addId);
+  };
+
+  // window.getDetailFood = (foodId) => {
+  //   getDetailFood(foodId);
+  // };
+};

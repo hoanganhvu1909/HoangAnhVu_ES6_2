@@ -19,12 +19,7 @@ export default class ListPerson {
     return index;
   }
   //Thuc hien nguoi dung
-  DelUser(id) {
-    const index = this.FindIndex(id);
-    if (index === -1) {
-      alert('Không tìm thấy id');
-    } else {
-      this.arr.splice(index, 1);
-    }
-  }
+  DelUser = function (index) {
+    this.arr.splice(index, 1);
+  };
 }
